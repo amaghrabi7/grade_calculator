@@ -10,7 +10,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final controller = TextEditingController();
 
-  String gradeLetter = 'PP';
+  String gradeLetter = '';
 
   @override
   Widget build(BuildContext context) {
