@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final controller = TextEditingController();
+
+  String gradeLetter = 'PP';
 
   @override
   Widget build(BuildContext context) {
@@ -37,27 +44,37 @@ class HomeScreen extends StatelessWidget {
                 ),
                 child: Text('Calculate'),
                 onPressed: () {
-                  int? grade = int.tryParse(controller.text);
-                  if (grade == null) {
-                    print('${controller.text} is not a number');
-                    return;
-                  }
+                  setState(() {
+                    int? grade = int.tryParse(controller.text);
+                    if (grade == null) {
+                      gradeLetter = '${controller.text} is not a number';
+                      return;
+                    }
 
-                  if (grade >= 90) {
-                    print("A");
-                  } else if (grade >= 80) {
-                    print("B");
-                  } else if (grade >= 70) {
-                    print("C");
-                  } else if (grade >= 60) {
-                    print("D");
-                  } else {
-                    print("F");
-                  }
-                  controller.clear();
+                    if (grade >= 90) {
+                      gradeLetter = "A";
+                    } else if (grade >= 80) {
+                      gradeLetter = "B";
+                    } else if (grade >= 70) {
+                      gradeLetter = "C";
+                    } else if (grade >= 60) {
+                      gradeLetter = "D";
+                    } else {
+                      gradeLetter = "F";
+                    }
+                    controller.clear();
+                  });
                 },
               ),
             ),
+            Expanded(
+              child: Center(
+                child: Text(
+                  gradeLetter,
+                  style: TextStyle(fontSize: 112, color: Colors.indigo),
+                ),
+              ),
+            )
           ],
         ),
       ),
